@@ -44,9 +44,11 @@ public class Loong : MonoBehaviour
         Chains.Clear();
         Bones.Clear();
         
+        //初始化链条
         if (Root != null)
             SetchildTransform(Root);
 
+        //记录骨骼长度
         if (Chains.Count > 1)
         {
             for (int index = 1; index < Chains.Count; index++)
@@ -61,6 +63,7 @@ public class Loong : MonoBehaviour
             LastTargetRotation = Target.rotation;
         }
 
+        //初始化路径数据
         if (isstrictpath)
         {
             RecordPath.Clear();
@@ -119,19 +122,8 @@ public class Loong : MonoBehaviour
 
 
             //累加到当前骨骼节点的总长度
-            float DesiredDistance = 0;
-                        
-            /*
-            if (RecordPath == null)
-            {
-                for (int index = Bones.Count - 1; index > -1; index--)
-                {
-                    Path oripoint = new Path();
-                    oripoint.Position = Bones[index].transform.position;
-                    oripoint.Rotation = Bones[index].transform.rotation;
-                    RecordPath.Add(oripoint);
-                }
-            }*/
+            float DesiredDistance = 0;                       
+            
 
             if (Vector3.Distance(RecordPath[RecordPath.Count - 1].Position, Target.position) > Precision)
             {
@@ -206,6 +198,7 @@ public class Loong : MonoBehaviour
         else
         {
             //Unstrict
+            //移动上一级骨骼，根据骨骼长度和移动后的骨骼朝向计算下级骨骼的位置，根据原始骨骼朝向和移动后的骨骼朝向旋转下级骨骼
             Chains[0].point.position = Target.position;
             Chains[0].point.rotation = Target.rotation * Quaternion.Inverse(LastTargetRotation);            
             for (int index = 1; index < Chains.Count; index++)
@@ -234,9 +227,5 @@ public class Loong : MonoBehaviour
 
     }
 
-    private void ChineseDragonChainSolving_Unstrict()
-    {
-        if (Target == null)
-            return;
-    }
+    
 }
