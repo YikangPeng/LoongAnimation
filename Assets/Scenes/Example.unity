@@ -167,14 +167,41 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 754885987}
-  speed: 20
+  speed: 16
   rotspeed: 0.005
-  heightspeed: 1
-  height: 5
+  heightspeed: 1.4
+  height: 6
   attackspeed: 0.6
   attackcurve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 23.735542
+      outSlope: 23.735542
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.07903625
+    - serializedVersion: 3
+      time: 0.3458774
+      value: 5
+      inSlope: 0.06901312
+      outSlope: 0.06901312
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.85313755
+      value: 0
+      inSlope: -17.951273
+      outSlope: -17.951273
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.062872976
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4

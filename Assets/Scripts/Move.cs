@@ -19,7 +19,7 @@ public class Move : MonoBehaviour
     private Vector3 AttackTarget;
     private float AttackWeight = 0.0f;
     private Vector3 InitialAttackPos;
-    private float attackcolddown = 0.0f;
+    private float attackcolddown = 0.0f;    
     
     // Start is called before the first frame update
     void Start()
@@ -31,17 +31,18 @@ public class Move : MonoBehaviour
     void Update()
     {
 
-        
+        attackcolddown += Time.deltaTime;
 
         Vector3 PlayerInTargetSpaceDir = transform.InverseTransformPoint(Player.transform.position).normalized;
-        if ((PlayerInTargetSpaceDir.z > 0) && (Mathf.Abs(PlayerInTargetSpaceDir.x / PlayerInTargetSpaceDir.z) <0.5f))
+        if ((PlayerInTargetSpaceDir.z > 0) && (Mathf.Abs(PlayerInTargetSpaceDir.x / PlayerInTargetSpaceDir.z) <0.4f))
         {
-            Debug.Log("attack");
-            if ((!isattack)  &&  (AttackWeight == 0.0f))
+            
+            if ((!isattack)  &&  (AttackWeight == 0.0f)  && (attackcolddown > 8.0f))
             {
                 isattack = true;
                 AttackTarget = Player.position;
                 InitialAttackPos = transform.position + new Vector3(0.0f, 1.0f, 0.0f);
+                attackcolddown = 0.0f;
             }
                 
         }
@@ -75,7 +76,7 @@ public class Move : MonoBehaviour
         if (isattack)
         {
             //Vector3 attackpos = Vector3.Lerp(AttackTarget;
-            finaltarget = Vector3.Lerp(InitialAttackPos, AttackTarget, AttackWeight);
+            finaltarget = Vector3.Lerp(InitialAttackPos, AttackTarget, AttackWeight) + new Vector3(0.0f, attackcurve.Evaluate(AttackWeight), 0.0f); ;
         }
         else
         {
